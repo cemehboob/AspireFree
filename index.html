@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth font-size-md">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AspireFree | Universal Learning for All Ages (5 to 100+)</title>
+    <meta name="description" content="Free education without age boundaries. Personalized learning practices from 5-year-old early childhood phonics to golden age cognitive wellness and high-stakes exam preparation.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            accent: '#f59e0b',
+                            kids: '#ec4899',
+                            youth: '#8b5cf6',
+                            exam: '#2563eb',
+                            career: '#059669',
+                            senior: '#d97706'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans transition-all duration-200">
+
+    <!-- Universal Accessibility & Age Bar -->
+    <div class="bg-slate-900 text-white text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="bg-blue-600/80 text-white font-bold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider">Universal Learning</span>
+                <span class="text-slate-300 hidden sm:inline">Education without age barriers &bull; 100% Free & Open Access</span>
+            </div>
+            <!-- Accessibility Quick Controls -->
+            <div class="flex items-center gap-3">
+                <span class="text-slate-400 text-xs hidden md:inline">Text Size:</span>
+                <div class="flex items-center bg-slate-800 rounded border border-slate-700 overflow-hidden text-xs">
+                    <button onclick="setFontSize('md')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn active" id="fontBtn-md" title="Standard text">A</button>
+                    <button onclick="setFontSize('lg')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn" id="fontBtn-lg" title="Large text (Senior / Low-vision friendly)">A+</button>
+                    <button onclick="setFontSize('xl')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn" id="fontBtn-xl" title="Extra Large text">A++</button>
+                </div>
+                <button onclick="readPageAloud()" class="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded text-xs transition-all">
+                    <i class="fa-solid fa-volume-high"></i> <span class="hidden sm:inline">Read Aloud</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-blue-500/20">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-slate-900">Aspire<span class="text-blue-600">Free</span></span>
+                        <span class="hidden md:inline-block text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full ml-1.5 border border-emerald-200">Ages 5 &ndash; 100+</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Learner Stage Selector Dropdown -->
+            <div class="hidden lg:flex items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+                <span class="text-slate-500 pl-2">Track:</span>
+                <button onclick="switchGlobalAgeGroup('kids')" class="age-pill px-2.5 py-1 rounded-lg transition-all" id="navAge-kids">🧸 5-8 Kids</button>
+                <button onclick="switchGlobalAgeGroup('youth')" class="age-pill px-2.5 py-1 rounded-lg transition-all" id="navAge-youth">🎒 9-14 Youth</button>
+                <button onclick="switchGlobalAgeGroup('exam')" class="age-pill px-2.5 py-1 rounded-lg transition-all active" id="navAge-exam">🎓 15-24 Exams</button>
+                <button onclick="switchGlobalAgeGroup('career')" class="age-pill px-2.5 py-1 rounded-lg transition-all" id="navAge-career">💼 25-54 Career</button>
+                <button onclick="switchGlobalAgeGroup('senior')" class="age-pill px-2.5 py-1 rounded-lg transition-all" id="navAge-senior">🌿 55+ Golden</button>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <div class="flex items-center gap-4 sm:gap-6 text-sm font-semibold">
+                <a href="practice.html" class="text-slate-700 hover:text-blue-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad text-blue-500"></i> Learning Arena
+                </a>
+                <a href="planner.html" class="text-slate-700 hover:text-blue-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-calendar-check text-indigo-500"></i> Study Planner
+                </a>
+                <a href="resources.html" class="text-slate-700 hover:text-blue-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-bookmark text-emerald-500"></i> Free Vault
+                </a>
+                <a href="practice.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-sm transition-all">
+                    Start Learning
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-slate-50 py-16 sm:py-24 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200 text-blue-800 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-full mb-6 shadow-sm">
+                <i class="fa-solid fa-earth-americas text-blue-600"></i> Open Education for Every Generation &bull; 100% Free
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight max-w-4xl mx-auto leading-tight">
+                Education Without <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Age Boundaries</span>.
+            </h1>
+            
+            <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Whether you are a <strong>5-year-old child</strong> sounding out your first words, a <strong>high schooler</strong> preparing for exams, an <strong>adult</strong> upskilling, or an <strong>80-year-old senior</strong> exercising cognitive agility—AspireFree personalizes the best learning practices for your age and life stage.
+            </p>
+
+            <!-- 5 Age Cohorts Selector -->
+            <div class="mt-10 max-w-4xl mx-auto">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Choose Your Age & Learning Stage</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                    <button onclick="selectAgeHero('kids')" class="hero-age-btn group p-4 rounded-2xl border-2 border-pink-200 hover:border-pink-500 bg-white hover:bg-pink-50/50 shadow-sm text-left transition-all">
+                        <div class="text-2xl mb-1">🧸</div>
+                        <div class="font-black text-slate-900 text-sm group-hover:text-pink-600">Ages 5–8</div>
+                        <div class="text-[11px] text-slate-500 font-medium">Little Explorers: Phonics, Sounds & Stories</div>
+                    </button>
+                    <button onclick="selectAgeHero('youth')" class="hero-age-btn group p-4 rounded-2xl border-2 border-purple-200 hover:border-purple-500 bg-white hover:bg-purple-50/50 shadow-sm text-left transition-all">
+                        <div class="text-2xl mb-1">🎒</div>
+                        <div class="font-black text-slate-900 text-sm group-hover:text-purple-600">Ages 9–14</div>
+                        <div class="text-[11px] text-slate-500 font-medium">Junior Scholars: Logic, STEM & Creative Writing</div>
+                    </button>
+                    <button onclick="selectAgeHero('exam')" class="hero-age-btn group p-4 rounded-2xl border-2 border-blue-500 bg-blue-50/70 shadow-sm text-left transition-all active-hero-btn">
+                        <div class="text-2xl mb-1">🎓</div>
+                        <div class="font-black text-blue-900 text-sm">Ages 15–24</div>
+                        <div class="text-[11px] text-blue-600 font-medium">Academy & Exams: IELTS, PTE, SAT, TOEFL</div>
+                    </button>
+                    <button onclick="selectAgeHero('career')" class="hero-age-btn group p-4 rounded-2xl border-2 border-emerald-200 hover:border-emerald-500 bg-white hover:bg-emerald-50/50 shadow-sm text-left transition-all">
+                        <div class="text-2xl mb-1">💼</div>
+                        <div class="font-black text-slate-900 text-sm group-hover:text-emerald-600">Ages 25–54</div>
+                        <div class="text-[11px] text-slate-500 font-medium">Professionals: Business Fluency & Skills</div>
+                    </button>
+                    <button onclick="selectAgeHero('senior')" class="hero-age-btn group p-4 rounded-2xl border-2 border-amber-200 hover:border-amber-500 bg-white hover:bg-amber-50/50 shadow-sm text-left transition-all col-span-2 sm:col-span-1">
+                        <div class="text-2xl mb-1">🌿</div>
+                        <div class="font-black text-slate-900 text-sm group-hover:text-amber-600">Ages 55+</div>
+                        <div class="text-[11px] text-slate-500 font-medium">Golden Lifelong: Memory, Culture & Tech</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Hero Preview Card -->
+            <div id="heroPreviewCard" class="mt-8 max-w-3xl mx-auto bg-white rounded-2xl p-6 border border-slate-200 shadow-xl text-left transition-all">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <span id="previewEmoji" class="text-3xl">🎓</span>
+                        <div>
+                            <h3 id="previewTitle" class="font-bold text-lg text-slate-900">Ages 15–24: Academy & High-Stakes Prep</h3>
+                            <span id="previewPedagogy" class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Deliberate Practice & Rubric Mastery</span>
+                        </div>
+                    </div>
+                    <button onclick="testHeroAudio()" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 bg-blue-50 px-3 py-1.5 rounded-lg">
+                        <i class="fa-solid fa-volume-high"></i> Voice Intro
+                    </button>
+                </div>
+                <p id="previewDesc" class="text-sm text-slate-600 leading-relaxed mb-5">
+                    Realistic exam simulation with instant Cambridge & ETS rubric evaluation for IELTS, PTE, TOEFL, and SAT. Timed conditions, word counting, essay templates, and speaking audio drills.
+                </p>
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <div id="previewTags" class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700 font-medium">⏱ Timed Practice</span>
+                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700 font-medium">📊 Band Rubrics</span>
+                        <span class="px-2.5 py-1 bg-slate-100 rounded-lg text-slate-700 font-medium">📝 Writing Task 2</span>
+                    </div>
+                    <a id="previewCta" href="practice.html?age=exam" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
+                        Enter Learning Arena <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Science-Backed Pedagogical Framework for Every Age -->
+    <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full">Developmental Neuroscience</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Best Learning Practices Tailored to Life Stages</h2>
+                <p class="text-slate-600 mt-4 text-base">
+                    The human brain learns differently at age 5, age 20, and age 75. AspireFree integrates the proven cognitive science for each stage of human development.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- 5-8 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-pink-50/50 to-white border border-pink-100 hover:shadow-lg transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-2xl">
+                        🧸
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-pink-600 uppercase tracking-wider">Ages 5–8</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Multisensory Phonics & Play</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li><i class="fa-solid fa-check text-pink-500 mr-1.5"></i> <strong>Montessori Audio:</strong> Connects letter symbols to natural spoken sounds.</li>
+                        <li><i class="fa-solid fa-check text-pink-500 mr-1.5"></i> <strong>Micro-Lessons:</strong> 10-minute game sessions aligned to young attention spans.</li>
+                        <li><i class="fa-solid fa-check text-pink-500 mr-1.5"></i> <strong>Positive Reinforcement:</strong> Cheer sounds and golden stars for confidence.</li>
+                    </ul>
+                </div>
+
+                <!-- 9-14 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-purple-50/50 to-white border border-purple-100 hover:shadow-lg transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl">
+                        🎒
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Ages 9–14</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Inquiry & Dual Coding</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li><i class="fa-solid fa-check text-purple-500 mr-1.5"></i> <strong>Visual + Text:</strong> Dual-coding memory techniques for school subjects.</li>
+                        <li><i class="fa-solid fa-check text-purple-500 mr-1.5"></i> <strong>Spaced Recall:</strong> Quick interactive quizzes that build long-term retention.</li>
+                        <li><i class="fa-solid fa-check text-purple-500 mr-1.5"></i> <strong>Scaffolded Writing:</strong> Structured sentence frames for creative stories.</li>
+                    </ul>
+                </div>
+
+                <!-- 15-24 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-blue-50/50 to-white border border-blue-100 hover:shadow-lg transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl">
+                        🎓
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Ages 15–24</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Deliberate Exam Practice</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li><i class="fa-solid fa-check text-blue-500 mr-1.5"></i> <strong>High-Stakes Rubrics:</strong> Cambridge & ETS official scoring models.</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-1.5"></i> <strong>Simulated Timing:</strong> Eliminates anxiety through authentic timed conditions.</li>
+                        <li><i class="fa-solid fa-check text-blue-500 mr-1.5"></i> <strong>Template Blueprints:</strong> Band 9 essay and oral structure formulas.</li>
+                    </ul>
+                </div>
+
+                <!-- 25-54 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-emerald-50/50 to-white border border-emerald-100 hover:shadow-lg transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">
+                        💼
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Ages 25–54</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Adult Andragogy</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>Problem-Centered:</strong> Real-world email diplomacy & executive summaries.</li>
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>Commuter Microlearning:</strong> 15-minute high-impact focused drills.</li>
+                        <li><i class="fa-solid fa-check text-emerald-500 mr-1.5"></i> <strong>Career Fluency:</strong> Presentation pitch timers and professional tone checks.</li>
+                    </ul>
+                </div>
+
+                <!-- 55+ -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-amber-50/50 to-white border border-amber-100 hover:shadow-lg transition-all space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl">
+                        🌿
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Ages 55+</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Neuroplasticity & Ease</h3>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2">
+                        <li><i class="fa-solid fa-check text-amber-500 mr-1.5"></i> <strong>Cognitive Reserve:</strong> Memory matching, word games, and mental gym.</li>
+                        <li><i class="fa-solid fa-check text-amber-500 mr-1.5"></i> <strong>Errorless Learning:</strong> No stressful timers or penalties; gentle encouragement.</li>
+                        <li><i class="fa-solid fa-check text-amber-500 mr-1.5"></i> <strong>Accessibility First:</strong> Large readable fonts and slow, clear speech narration.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Highlights for All Generations -->
+    <section class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-100/60 px-3 py-1 rounded-full">Universal Curriculum</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">What Can You Practice on AspireFree?</h2>
+                </div>
+                <p class="text-slate-500 text-sm max-w-md mt-2 md:mt-0">
+                    Switch tracks at any moment. Everything is client-side, private, and available with $0 barrier.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Kids -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-700 text-xs font-bold rounded-lg uppercase">Early Childhood</span>
+                            <span class="text-xs text-slate-400 font-semibold">Ages 5–8</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Phonics & Story Playground</h3>
+                        <p class="text-sm text-slate-600 mb-4">Interactive alphabet sounds, sight word spelling, picture story quizzes, and speak-aloud star games.</p>
+                        <ul class="text-xs text-slate-500 space-y-1.5">
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Interactive A-Z Soundboard</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Picture Word Association</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Counting & Shape Explorer</li>
+                        </ul>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">Fun & Free</span>
+                        <a href="practice.html?age=kids" class="text-sm font-bold text-pink-600 hover:text-pink-800">Explore Kids Arena &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Youth -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-lg uppercase">School & Discovery</span>
+                            <span class="text-xs text-slate-400 font-semibold">Ages 9–14</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Junior Scholars Hub</h3>
+                        <p class="text-sm text-slate-600 mb-4">Reading adventure passages, story starter creative writing, mental math puzzles, and science trivia.</p>
+                        <ul class="text-xs text-slate-500 space-y-1.5">
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Reading Comprehension Quests</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Creative Story Writing Lab</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Mental Math & Logic Challenges</li>
+                        </ul>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">Inquiry-Based</span>
+                        <a href="practice.html?age=youth" class="text-sm font-bold text-purple-600 hover:text-purple-800">Launch Junior Hub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Exams -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-lg uppercase">Standardized Tests</span>
+                            <span class="text-xs text-slate-400 font-semibold">Ages 15–24</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">High-Stakes Exam Suite</h3>
+                        <p class="text-sm text-slate-600 mb-4">IELTS, PTE, TOEFL, and Digital SAT simulated modules with instant Cambridge/ETS automated rubric scoring.</p>
+                        <ul class="text-xs text-slate-500 space-y-1.5">
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> True / False / Not Given Reading</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Task 2 Essay Rubric Evaluator</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> 2-Min Speaking Cue Card Timer</li>
+                        </ul>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">Official Standards</span>
+                        <a href="practice.html?age=exam" class="text-sm font-bold text-blue-600 hover:text-blue-800">Start Exam Sim &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Career -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-lg uppercase">Career & Adults</span>
+                            <span class="text-xs text-slate-400 font-semibold">Ages 25–54</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Executive & Business Fluency</h3>
+                        <p class="text-sm text-slate-600 mb-4">Professional email diplomacy checker, executive report summaries, and elevator pitch presentation pacing.</p>
+                        <ul class="text-xs text-slate-500 space-y-1.5">
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Executive Email Tone Analyzer</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Presentation Pacing Simulator</li>
+                            <li><i class="fa-solid fa-star text-amber-400 mr-1"></i> Corporate Vocabulary Bank</li>
+                        </ul>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">High Impact</span>
+                        <a href="practice.html?age=career" class="text-sm font-bold text-emerald-600 hover:text-emerald-800">Start Career Track &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Senior -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-lg uppercase">Golden Age & Lifelong</span>
+                            <span class="text-xs text-slate-400 font-semibold">Ages 55+</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Brain Gym & Digital Confidence</h3>
+                        <p class="text-sm text-slate-600 mb-4">Memory pair drills, calm reflective life journaling, gentle narrated audio stories, and simple modern technology guides.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-500">
+                            <div><i class="fa-solid fa-star text-amber-400 mr-1"></i> Cognitive Memory Association</div>
+                            <div><i class="fa-solid fa-star text-amber-400 mr-1"></i> Stress-Free Reflective Writing</div>
+                            <div><i class="fa-solid fa-star text-amber-400 mr-1"></i> Gentle 0.85x Audiobook Player</div>
+                            <div><i class="fa-solid fa-star text-amber-400 mr-1"></i> Digital Safety & Smartphone Tips</div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-700">Zero Pressure &bull; Gentle Pacing</span>
+                        <a href="practice.html?age=senior" class="text-sm font-bold text-amber-600 hover:text-amber-800">Enter Golden Space &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Generational Community Voices -->
+    <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Lifelong Impact</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-3">Loved by Learners from 5 to 85</h2>
+                <p class="text-slate-600 mt-2 text-base">Real experiences from students, parents, professionals, and seniors worldwide.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Parent of 5yo -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm italic mb-4">
+                        &ldquo;My 5-year-old son Lucas loves the phonics sound cards and star cheers. He asks to play 'Aspire' every afternoon. It made learning to read a joy without annoying ads or subscriptions.&rdquo;
+                    </p>
+                    <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-600 font-bold flex items-center justify-center text-sm">ML</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-xs">Maria &amp; Lucas (Age 5)</div>
+                            <div class="text-[11px] text-slate-500">Early Phonics Learner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 21yo Exam student -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm italic mb-4">
+                        &ldquo;The IELTS Writing Task 2 instant rubric evaluation helped me understand why my essays were stuck at 6.0. In three weeks, I reached Band 7.5. Unbelievable that this is 100% free.&rdquo;
+                    </p>
+                    <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center text-sm">TA</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-xs">Tariq Al-Mansoor (Age 21)</div>
+                            <div class="text-[11px] text-slate-500">University Applicant &bull; Band 7.5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 72yo Senior -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm italic mb-4">
+                        &ldquo;At 72, I wanted to keep my memory sharp and feel more comfortable using the internet. The large print mode is wonderful on my eyes, and the daily memory drills are my morning ritual with coffee.&rdquo;
+                    </p>
+                    <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 font-bold flex items-center justify-center text-sm">EH</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-xs">Eleanor Hughes (Age 72)</div>
+                            <div class="text-[11px] text-slate-500">Lifelong Learner &bull; Retired Teacher</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-sm py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2 text-white font-extrabold text-lg">
+                    <i class="fa-solid fa-graduation-cap text-blue-500"></i> AspireFree
+                </div>
+                <p class="text-xs text-slate-400">Universal, open-access education without age bounding. Built for educational equity from early childhood to lifelong golden years.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Age Tracks</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="practice.html?age=kids" class="hover:text-white">Ages 5–8: Phonics &amp; Storytelling</a></li>
+                    <li><a href="practice.html?age=youth" class="hover:text-white">Ages 9–14: Junior Inquiry &amp; Logic</a></li>
+                    <li><a href="practice.html?age=exam" class="hover:text-white">Ages 15–24: IELTS, PTE &amp; SAT Prep</a></li>
+                    <li><a href="practice.html?age=career" class="hover:text-white">Ages 25–54: Business Fluency</a></li>
+                    <li><a href="practice.html?age=senior" class="hover:text-white">Ages 55+: Memory &amp; Lifelong Health</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Adaptive Tools</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="practice.html" class="hover:text-white">Learning Arena</a></li>
+                    <li><a href="planner.html" class="hover:text-white">Developmental Study Planner</a></li>
+                    <li><a href="resources.html" class="hover:text-white">Printable &amp; Digital Vault</a></li>
+                    <li><button onclick="setFontSize('lg')" class="hover:text-white text-left">Large Text Mode (Senior Friendly)</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Educational Philosophy</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Designed around Piaget's developmental stages, Montessori multisensory mechanics, Knowles' adult andragogy, and cognitive reserve preservation for seniors.
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 pt-6 border-t border-slate-800">
+            &copy; 2026 AspireFree Open Prep. Built for global educational equity. Non-commercial, open-access, zero age bounding.
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

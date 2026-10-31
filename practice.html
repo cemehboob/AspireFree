@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="font-size-md">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AspireFree | Universal Learning Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Top Arena Bar -->
+    <header class="bg-slate-900 text-white px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between sticky top-0 z-50 shadow-md gap-3">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-slate-400 hover:text-white text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left"></i> Home
+            </a>
+            <div class="h-4 w-px bg-slate-700 hidden sm:block"></div>
+            <!-- Stage Switcher -->
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 hidden md:inline">Current Stage:</span>
+                <select id="arenaAgeSelect" onchange="changeArenaAge(this.value)" class="bg-slate-800 text-white font-bold text-xs px-3 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-blue-500 cursor-pointer">
+                    <option value="kids">🧸 Ages 5–8: Little Explorers</option>
+                    <option value="youth">🎒 Ages 9–14: Junior Scholars</option>
+                    <option value="exam" selected>🎓 Ages 15–24: Exam Prep & Academy</option>
+                    <option value="career">💼 Ages 25–54: Professional Growth</option>
+                    <option value="senior">🌿 Ages 55+: Golden Age & Lifelong</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Controls: Font, Voice, Timer -->
+        <div class="flex items-center gap-3">
+            <!-- Text Size Scaler -->
+            <div class="flex items-center bg-slate-800 rounded border border-slate-700 overflow-hidden text-xs">
+                <button onclick="setFontSize('md')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn active" id="fontBtn-md">A</button>
+                <button onclick="setFontSize('lg')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn" id="fontBtn-lg">A+</button>
+                <button onclick="setFontSize('xl')" class="px-2 py-1 font-semibold hover:bg-slate-700 font-size-btn" id="fontBtn-xl">A++</button>
+            </div>
+
+            <!-- Voice Narration -->
+            <button onclick="readActiveModule()" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-2.5 py-1.5 rounded-lg border border-slate-700 flex items-center gap-1.5" title="Listen to text">
+                <i class="fa-solid fa-volume-high"></i> <span class="hidden sm:inline">Listen</span>
+            </button>
+
+            <!-- Adaptive Session Clock -->
+            <div id="timerContainer" class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 font-mono text-sm">
+                <i class="fa-regular fa-clock text-amber-400"></i>
+                <span id="timerDisplay">20:00</span>
+                <button id="timerToggleBtn" onclick="toggleTimer()" class="text-[11px] bg-slate-700 hover:bg-slate-600 px-1.5 py-0.5 rounded text-slate-200">
+                    Pause
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-navigation for Active Stage Modules -->
+    <div class="bg-white border-b border-slate-200 px-4 sm:px-6 shadow-sm">
+        <div id="moduleTabsContainer" class="max-w-7xl mx-auto flex overflow-x-auto space-x-6 text-sm font-semibold">
+            <!-- Dynamically populated by app.js based on age group -->
+        </div>
+    </div>
+
+    <!-- Active Practice Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div id="arenaContentArea">
+            <!-- Dynamically populated with modules by app.js -->
+        </div>
+    </main>
+
+    <!-- Toast Notification for Star & Scores -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 z-50">
+        <span id="toastIcon" class="text-2xl">⭐</span>
+        <div>
+            <div id="toastTitle" class="font-bold text-sm">Superstar!</div>
+            <div id="toastMessage" class="text-xs text-slate-300">You completed this practice module!</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
